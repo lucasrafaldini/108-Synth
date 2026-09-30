@@ -1,0 +1,22 @@
+{
+  "name": "108 Synth",
+  "short_name": "108Synth",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "landscape",
+  "background_color": "#1a1c22",
+  "theme_color": "#ff7828",
+  "description": "Multiplatform Polyphonic Analog Synthesizer",
+  "icons": [
+    {
+      "src": "./icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>108 Synth - Polyphonic Analog Virtual Synthesizer</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#ff6b35">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="synth-container">
+    <!-- Header -->
+    <header class="synth-header">
+      <div class="brand-area">
+        <h1 class="brand-title">108 SYNTH</h1>
+        <span class="brand-subtitle">Polyphonic Virtual Analog</span>
+      </div>
+      <div class="preset-bar">
+        <select id="presetSelect" class="preset-select" aria-label="Preset Selection"></select>
+        <div class="btn-midi">
+          <span class="status-dot"></span>
+          <span id="midiStatus">MIDI</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Modules Grid -->
+    <main class="modules-grid">
+      <!-- DCO 1 & 2 -->
+      <section class="module">
+        <h2 class="module-title">DCO 1 &amp; 2</h2>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="osc1Wave">Osc 1 Wave</label>
+          <select id="osc1Wave" class="preset-select" style="padding: 4px 6px;">
+            <option value="sawtooth">Sawtooth</option>
+            <option value="square">Pulse / Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sine">Sine</option>
+          </select>
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="osc1Vol">Osc 1 Level</label>
+          <input type="range" id="osc1Vol" min="0" max="1" step="0.01" value="0.8">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="osc2Wave">Osc 2 Wave</label>
+          <select id="osc2Wave" class="preset-select" style="padding: 4px 6px;">
+            <option value="sawtooth">Sawtooth</option>
+            <option value="square">Pulse / Square</option>
+            <option value="triangle">Triangle</option>
+            <option value="sine">Sine</option>
+          </select>
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-label">
+            <span>Osc 2 Detune</span>
+            <span id="v-detune" class="ctrl-value">8 cents</span>
+          </div>
+          <input type="range" id="osc2Detune" min="-30" max="30" step="1" value="8">
+        </div>
+      </section>
+
+      <!-- Sub & Noise -->
+      <section class="module">
+        <h2 class="module-title">Sub &amp; Noise</h2>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="subVol">Sub-Osc Level</label>
+          <input type="range" id="subVol" min="0" max="1" step="0.01" value="0.2">
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-label">
+            <span>VCF Cutoff</span>
+            <span id="v-cutoff" class="ctrl-value">4000 Hz</span>
+          </div>
+          <input type="range" id="cutoff" min="50" max="15000" step="10" value="4000">
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-label">
+            <span>VCF Resonance</span>
+            <span id="v-reso" class="ctrl-value">30%</span>
+          </div>
+          <input type="range" id="reso" min="0.1" max="20" step="0.1" value="3">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="fltEnv">VCF Env Amount</label>
+          <input type="range" id="fltEnv" min="0" max="8000" step="50" value="2500">
+        </div>
+      </section>
+
+      <!-- VCF Envelope -->
+      <section class="module">
+        <h2 class="module-title vcf">VCF Envelope</h2>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="fltA">Attack</label>
+          <input type="range" id="fltA" min="0.002" max="2.0" step="0.005" value="0.05">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="fltD">Decay</label>
+          <input type="range" id="fltD" min="0.01" max="3.0" step="0.01" value="0.4">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="fltS">Sustain</label>
+          <input type="range" id="fltS" min="0" max="1" step="0.01" value="0.3">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="fltR">Release</label>
+          <input type="range" id="fltR" min="0.01" max="4.0" step="0.01" value="0.4">
+        </div>
+      </section>
+
+      <!-- VCA Envelope -->
+      <section class="module">
+        <h2 class="module-title vca">VCA Envelope</h2>
+        <div class="ctrl-row">
+          <div class="ctrl-label">
+            <span>Attack</span>
+            <span id="v-ampA" class="ctrl-value">10 ms</span>
+          </div>
+          <input type="range" id="ampA" min="0.002" max="2.0" step="0.005" value="0.01">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="ampD">Decay</label>
+          <input type="range" id="ampD" min="0.01" max="3.0" step="0.01" value="0.3">
+        </div>
+        <div class="ctrl-row">
+          <label class="ctrl-label" for="ampS">Sustain</label>
+          <input type="range" id="ampS" min="0" max="1" step="0.01" value="0.8">
+        </div>
+        <div class="ctrl-row">
+          <div class="ctrl-label">
+            <span>Release</span>
+            <span id="v-ampR" class="ctrl-value">300 ms</span>
+          </div>
+          <input type="range" id="ampR" min="0.01" max="4.0" step="0.01" value="0.3">
+        </div>
+      </section>
+
+      <!-- Chorus & Master -->
+      <section class="module">
+        <h2 class="module-title fx">Chorus &amp; Master</h2>
+        <div class="ctrl-row">
+          <span class="ctrl-label">Stereo Chorus</span>
+          <div class="button-group">
+            <button class="btn-toggle" data-mode="0">Off</button>
+            <button class="btn-toggle active" data-mode="1">I</button>
+            <button class="btn-toggle" data-mode="2">II</button>
+            <button class="btn-toggle" data-mode="3">I+II</button>
+          </div>
+        </div>
+        <div class="ctrl-row">
+          <span class="ctrl-label">Oscilloscope</span>
+          <canvas id="scope" class="scope-canvas" width="200" height="50"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <!-- Piano Keyboard -->
+    <footer class="keyboard-section">
+      <div id="pianoKeyboard" class="keyboard"></div>
+      <p class="footer-info">
+        Play with Touch, Mouse, MIDI Keyboard, or Computer Keys [A S D F G H J K] &bull; 
+        <a href="https://github.com/lucasrafaldini/108-Synth" target="_blank" style="color: var(--accent-orange); text-decoration: none;">Hacktoberfest Open Source Project</a>
+      </p>
+    </footer>
+  </div>
+
+  <script src="synth.js"></script>
+</body>
+</html>
